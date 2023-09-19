@@ -1,0 +1,23 @@
+1. ALT+SHIFT+N 후 Class를 들어가서 Name을 적고 Finsh를 눌으면 된다.
+2.
+1)main 을 적고 Ctrl+Space bar를 누른후 엔터를 치면 해결된다.
+2)SampleProgram
+3)F11
+4)Ctrl+F11
+
+3.%j
+4. 1) int height;
+   2)double size = 0.25;
+   3)double total = height + size;
+   4)char c = 'a';
+   5)string name = "이선진";
+5.
+1)값: 79.8
+타입: double
+2)값: 3 
+타입: int
+3)값: 3.3333
+타입: double
+4)값: false
+타입: boolean 
+
