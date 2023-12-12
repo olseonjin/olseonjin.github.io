@@ -1,0 +1,292 @@
+4장 연습문제 1~15
+
+1. 자바의 클래스와 객체에 대한 설명 중 틀린 것은?
+1) 클래스 바깥에 전역 변수는 선언할 수 없다.
+2) 클래스는 객체를 생성하기 위한 틀이다.
+3) 클래스의 맴버 변수를 필드라고 부르며, 클래스는 필드와 메소드로 이루어진다.
+4) 필드는 클래스 내에서 private 보다 public으로 선언하는 것이 바람직하다.
+답: 4번
+
+2. 생성자에 대한 설명 중 틀린 것은?
+1) 생성자가 작성되어 있지 않으면, 컴파일러가 자동으로 기본 생성자를 추가해준다.
+2) 생성자의 이름은 클래스의 이름과 반드시 같아야 한다.
+3) this()는 생성자 내에서 다른 생성자를 호출하는 코드이다.
+4) 생성자에서는 아무 값도 리턴하지 않기 때문에 return 문을 사용할 수 없다.
+답: 4번
+
+3. 다음 코드 중 오류가 있는 것은?
+1) Power [] p = new Power [10]; 2) Power p [] = new Power [10];
+3) Power p [10] = new Power [10]; 4) Power [] p;
+답: 3번
+
+4. 다음 코드에 대해 설명하는 문항 중 틀린 것은?
+Book [] book = new Book [10];
+1) book은 배열에 대한 레퍼런스이다.
+2) Book 객체ㅏㄱ 10개 만들어진다.
+3) for(int i = 0; i<book.size; i++) book[i] = new Book(); 로 객체들을 만들어
+    야 비로소 배열이 완성된다.
+4) book[0], book[1], .... book[9] 모두 Book 객체에 대한 레퍼런스이다.
+답: 3번
+
+5. 다음 중 메소드 오버로딩에 실패하나 사례는?
+1)
+class A {
+	int x;
+	void f(int a) { x = a; }
+	int f(int b) { return x+b; }
+}
+2)
+class A {
+	int x;
+	void f(int a) { x = a; }
+	void f() { x = 0; }
+}
+3)
+class A {
+	int x;
+	int f() { return x; }
+	int f(int a, int b) {return a+b; }
+}
+4)
+class A {
+	static int x=0;
+	static int f(int a) {return a+x; }
+	static int f() { return 3; }
+}
+답: 1번
+
+6. 다음 코드에 대해 답하라.
+class TV {
+	private int size;
+	private String manufacturer;
+	public TV() {
+	   size = 32;
+	   manufacturer = "LG";
+	   System.out.println(size + "인치 " + manufacturer);
+	}
+	public TV(String manufacturer) {
+	   this.size = 32;
+	   this.manufacturer = manufacturer;
+	   System.out.println(size + "인치 " + manufacturer);
+	}
+	public TV(int size, String manufacturer) {
+	   this.size = size;
+	   this.manufacturer = manufacturer;
+	   System.out.println(size + "인치 " + manufacturer);
+	}
+}
+1) this()를 이용하여 생성자를 수정하라.
+2) new TV(); 와 new TV("삼성");를 실행하면 실행 결과는 각각 무엇인가?
+3) 65인치 "삼성" TV 객체를 생성하는 코드를 적어라.
+4) this()를 이용하는 장점은 무엇인가?
+답:
+1) public TV() {
+    this(32, "LG");
+}
+
+public TV(String manufacturer) {
+    this(32, manufacturer);
+}
+2) new TV();는 32인치 LG TV를 출력합니다.
+   new TV("삼성");는 32인치 삼성 TV를 출력합니다.
+3) TV largeSamsungTV = new TV(65, "삼성");
+4) 중복 코드를 피하고 코드 재사용성을 높임
+
+7. 다음 클래스에는 컴파일 오류가 있다. 오류 부분을 지적하고 오류를 수정할 수 있는
+    방법을 모두 제시하라. 그리고 그 중 객체 지향 프로그래밍에 가장 적합한 방법을 설
+    명하라.
+class Person {
+	private int age;
+}
+public class Example {
+	public static void main (String args[]) {
+	   person aPerson = new Person();
+	   aPerson.age = 17;
+	}
+}
+답: age
+
+8. 다음 코드를 객체 지향 프로그래밍 관점에서 바람직하나 코드로 수정하라.
+class Power {
+	public int kick;
+	public int punch;
+}
+public class Example {
+	public static void main (String args[]) {
+	   power robot = new Power();
+	   robot.kick = 10;
+	   robot.punch = 20;
+	}
+}
+1) 생성자를 이용하여 수정하라.
+2) 생성자 대신 메소드를 추가하여 수정하라.
+답:
+1)class Power {
+    private int kick;
+    private int punch;
+
+    public Power() {
+        this(0, 0);
+    }
+
+    public Power(int kick, int punch) {
+        this.kick = kick;
+        this.punch = punch;
+    }
+
+    public int getKick() {
+        return kick;
+    }
+
+    public void setKick(int kick) {
+        this.kick = kick;
+    }
+
+    public int getPunch() {
+        return punch;
+    }
+
+    public void setPunch(int punch) {
+        this.punch = punch;
+    }
+}
+
+public class Example {
+    public static void main(String args[]) {
+        Power robot = new Power(10, 20);
+    }
+}
+
+2)class Power {
+    private int kick;
+    private int punch;
+
+    public void setKick(int kick) {
+        this.kick = kick;
+    }
+
+    public int getKick() {
+        return kick;
+    }
+
+    public void setPunch(int punch) {
+        this.punch = punch;
+    }
+
+    public int getPunch() {
+        return punch;
+    }
+}
+
+public class Example {
+    public static void main(String args[]) {
+        Power robot = new Power();
+        robot.setKick(10);
+        robot.setPunch(20);
+    }
+}
+
+
+
+9. 다음은 객체 소멸에 대한 설명이다. 보기에서 빈칸에 적절한 말을 삽입하라.
+자바에서는 객체를 임의로 ____수 없으며, 이것은 개발자에게 매우 ____일
+이다. 참조하는 ____가 하나도 없는 객체를 ____라고 판단하고, 이를 가용
+메모리로 자동 수집하는 ____을 진행시킨다. 응용프로그램에서 자바 플랫폼
+에게 이 과정을 지시하고자 하면 ____ 코드를 호출하면 된다.
+답: 제거할, 중요한, 변수 가비지, 가비지 컬렉션, System.gc()
+
+10. 다음 코드가 실행될 때 가비지가 발생하는가? 만일 발생한다면 발생하는 위치와 과정
+      을 설명하라.
+1) 
+String s = null;
+for(int n= 0; n<10; n++) {
+	s = new String("Hello" + n);
+	System.out.println(s);
+}
+2)
+String a = new String("aa");
+String b = a;
+String c = b;
+a = null;
+b = null;
+답: 가비지가 발생하지 않습니다.
+
+11. 다음 클래스에서 멤버 함수의 사용이 잘못된 것은?
+class StaticTest {
+	static int a;
+	static int getA() { return a; }   //1)
+	int b;                            
+	int getB() { return b; }          //2)
+	int f() { return getA(); }        //3)  
+	static int g() { return getB(); } //4)
+}
+답: 2번
+
+12. 다음 코드에서 잘못된 문장은?
+class StaticSample {
+	public int x;
+	public static int y;
+	public static int f() { return y; }
+}
+public class UsingStatic {
+	public static void main(String[] args) {
+	staticSample.x = 5;                 //1)
+	staticSample.y = 10;                //2)
+	int tmp = staticSample.f();         //3)
+	staticSample a - new staticSample();
+	tmp = a.y;                          //4)
+	}
+}
+답: 4번
+
+13. 다음 소스에 틀린 부분이 있는지 판단하라. 만일 있다면 수정하라.
+class Test {
+	public int f(int a, int b) {
+	   return a+b;
+	}
+	public static void main(String [] args) {
+	   int sum = f(2, 4);
+	}
+}
+답:    int sum = f(2, 4);
+	}
+} 에서
+      Test test = new Test();
+      int sum - test.f(2, 4);
+        }
+} 로 수정
+
+14. 다음 코드에는 final과 관련하여 3가지 잘못된 것이 있다. 잘못된 내용을 설명하라.
+final class Rect {
+	final protected int x=  5;
+	final public void f() {
+	   x++;
+	    System.out.print(x);
+	}
+}
+class SpecialRect extends Rect {// SpecialRect는 Rect를 상속받는다.
+	public void f() {
+	   system.out.print(super.x); // super.x는 Rect의 x
+	}
+}
+답:
+1) f()에서 x++로 값 변경 오류
+2) final로 선언된 변수값은 변경할 수 없음
+3) 'x'가 'protected'로 선언되어 'Rect' 클래스 'x'에 접근안됨
+
+15. 가비지와 가비지 컬렉션은 표준 C나  C++에는 없는 자바 언어의 독특한 특성이다. 가
+      비지란 무엇인지, 자바에서는 왜 가비지 컬렉션이 필요한지, 가비지 컬렉션이 개발자
+      에게 주는 장점과 단점은 무엇인지 설명하라.
+답: 장점: 프로그램의 안정성을 높임 
+      단점: 가비지 컬렉션의 작동으로 인해 예측할 수 없는 지연 발생
+
+16. 다음 표를 완성하라. 멤버가 4가지 접근 지정자로 각각 선언되었을 때, 같은 패키지의
+      클래스와 다른 패키지의 클래스에서 이 멤버를 접근할 수 있는지 o, x로 표기하라.
+	           | default | public | protected | private |
+같은 패키지 클래스       |         |   O    |           |         |
+다른 패키지 클래스       |               |     O    |           |         |
+답:
+	           | default | public | protected | private |
+같은 패키지 클래스 |    O    |   O    |     O     |         |
+다른 패키지 클래스 |         |   O    |           |         |
+

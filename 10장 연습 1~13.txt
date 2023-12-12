@@ -1,0 +1,159 @@
+10장 연습 1~13
+
+1. 자바의 이벤트 기반 프로그래밍에 대한 설명으로 틀린 것을 골라라.
+1) 이벤트 분배 스레드가 존재한다.
+2) AWT나 스윙 응용프로그램은 이벤트 기반 응용프로그램이다.
+3) 키 이벤트를 처리하는 도중 마우스 이벤트가 발생하면, 마우스 이벤트를 처리한 뒤
+    중단시킨 키 이벤트 처리를 계속 한다.
+4) 컴포넌트마다 처리할 수 있는 이벤트가 서로 다르다.
+답: 3번
+
+2. MouseEvent 객체가 제공하지 않는 정보는 무엇인가?
+1) 이벤트 소스 2) 마우스 클릭된 화면 좌표
+3) 클릭된 마우스 버튼 번호 4) 마우스 드래깅 길이
+답: 4번
+
+3. 다음 프로그램 코드를 익명 클래스를 이용하여 다시 작성하라.
+JButton btn = new JButton("Hello");
+btn.addActionListener(new MyActionListener());
+
+class MyActionListener implements ActionListener {
+	public void actionPerformed(ActionEvent e) {
+	   System.ouot.println("Click");
+	}
+}
+답:
+JButton btn = new JButton("Hello");
+btn.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e) {
+        System.out.println("Click");
+    }
+});
+
+4. 다음 프로그램 코드를 익명 클래스를 이용하여 다시 작성하라.
+JButton btn = new JButton("Hello");
+btn.addKeyListener(new MyKeyListener());
+
+class MyKeyListener extends KeyAdapter {
+	public void keyReleadsed(KeyEvent e) {
+	   System.out.println("Key Released");
+	}
+}
+답:
+JButton btn = new JButton("Hello");
+btn.addKeyListener(new KeyAdapter() {
+    public void keyReleased(KeyEvent e) {
+        System.out.println("Key Released");
+    }
+});
+
+5. 다음 프로그램에서 틀린 부분을 찾아 수정하라.
+1)
+class MyActionListener extends ActionAdapter {
+	public void actionPerformed(ActionEvent e){
+	   System.out.println("Click");
+}
+답:
+class MyActionListener implements ActionListener {
+    public void actionPerformed(ActionEvent e){
+        System.out.println("Click");
+    }
+}
+
+2)
+class MyMouseListener implements MouseListener {
+	public void mousePressed(MouseEvent e) {
+	   System.out.println("Mouse Pressed");
+	}
+}
+답:
+class MyKeyListener extends KeyAdapter {
+    public void keyPressed(KeyEvent e) {
+        System.out.println("Key Pressed");
+    }
+}
+
+3)
+class MyKeyListener extends KeyAdapter {
+	public void keyTyped(ActionEvent e) {
+	   System.out.println("Key Pressed");
+	}
+}
+답:
+class MyKeyListener extends KeyAdapter {
+    public void keyPressed(KeyEvent e) {
+        System.out.println("Key Pressed");
+    }
+}
+
+
+6. 다음 Action 이벤트 리스너 코드가 있다.
+class MyActionListener implements ActionListener {
+	private String msg;
+	public MyActionListener(STring msg) { this.msg = msg; }
+	public void actionPerformed(ActionEvent e) { System.out.println(msg); }
+}
+"Hello" 버튼에 다음과 같이 리스너를 등록하고, 버튼을 클릭하면 실행 결과는 무엇인가?
+JButton btn = new JButton("Hello");
+btn.addActionListener(new MyActionListener("1"));
+btn.addActionListener(new MyActionListener("2"));
+btn.addActionListener(new MyActionListener("3"));
+답:
+1
+2
+3
+
+7. 다음 중 어댑터 클래스르 락지지 않은 리스너는 무엇인가?
+1) ItemListener 2) KeyListener
+3) FocusListener 4) WindowListener
+답: 2번
+
+8. component가 포커스를 가지고 있어야 키 이벤트를 처리할 수 있다. component에 포
+    커스를 강제로 설정하는 코드는 무엇인가?
+1) component.setFocus(); 2) component.focusRequest();
+3) component.requestFocus(); 4) component.focus();
+답: 3번
+
+9. 다음 중에서 유니코드 키가 아닌 것을 모두 골라라.
+a, <Alt>, 9, %, <Tab>, @, <Delete>, ;, <Shift>, ~, <Help>
+답: a, 9, %, @, ;, ~
+
+10.다음 코드는 a 키가 눌러졌는지 판별하기 위한 처리 코드이다.
+public void keyPressed(KeyEvent e) {
+	if(e.getKeyChar() == ___________) {
+	   System.exit(0);
+	}
+}
+1) 빈칸을 채워라.
+2) 2번쨰 라인을 <ALT> 키가 눌러졌는지 판별하는 코드로 수정하라.
+답: 1) 'a', 2) if(e.isAltDown()) { System.exit(0);} 
+
+11. 키 이벤트가 발생할 때 KeyListener의 keyPressed(), keyReleased(),
+    keyTyped() 메소드가 호출되는 순서에 대해 답하라.
+1) 사용자가 a 키를 입력할 때
+2) 사용자가 <Esc> 키를 입력할 때
+답:keyPressed() keyTyped() 순, keyPressed() keyReleased() 순
+
+12. 다음 마우스 리스너가 있다.
+class MyMouseListener extends MouseAdapter {
+	private in count=0;
+	public void mousePressed(MouseEvent e) { count++; }
+	public void mouseReleased(MouseEvent e) { System.out.print(count); }
+	public void mouseDragged(MouseEvent e) { count++; }
+}
+그리고 컨텐트팬에 다음과 같이 Mouse 리스너와 Mouse?Motion 리스너를 등록하였다.
+contentPane.addMouseListener(new MyMouseListener());
+contentPane.addMouseMotionListener(new MyMouseListner());
+1) 컨텐트팬에 마우스를 한 번 누르고 놓았을 때 화면에 출력되는 내용은?
+2) 컨텐트팬에 마우스를 누른 후 드래그하고 마우스를 놓았을 때 출력되는 내용은?
+    (그동안 mouseDragged()가 10번 실행되었다.)
+3) 마우스 리스너 등록 코드를 다음과 같이 바꾸었을 때 (1), (2)번에 대한 결과는?
+MyMouseListener ml = new MyMouseListener();
+contentPane.addMouseListener(ml);
+contentPane.addMouseMotionListener(ml);
+답: 1, 11, 결과는 변하지 않음
+
+13. 스윙 컴포넌트 component에 대해 다음 문장의 의미는 각각 무엇인가?
+component.repaint();
+component.revalidate();
+답:Swing 컴포넌트에게 화면을 다시 그리도록 요청합니다., 컴포넌트의 크기 및 배치를 변경했을 때, 해당 컴포넌트와 그 자식 컴포넌트들에 대해 레이아웃을 재구성하도록 요청합니다.

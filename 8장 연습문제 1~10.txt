@@ -1,0 +1,91 @@
+8장 연습문제 1~10
+
+1. 스트림에 대한 설명으로 틀린 것은?
+1) 입출력이 동시에 되는 스트림은 없다.
+2) 스트림은 다른 스트림과 연결될 수 없다.
+3) 스트림은 먼저 들어온 데이터를 먼저 내보는 방식이다.
+4) 스트림은 바이트를 다루는 스트림과 문자만 다루는 스트림으로 나누어진다.
+답: 2번
+
+2. 다음 응용에서 어떤 입출력 스트림 클래스를 사용하여야 하는가?
+1) 음악 파일 연주 2) PPT 파일 복사
+3) 영어와 한글이 기록된 사전 읽기 4) 선수 이름과 점수를 문자열로 저장
+답: AudioInputStream, FileInputStream, InputStreamReader, BufferedWriter
+
+3. 이미지 파일을 읽으려고 한다. 가장 적합한 클래스는?
+1) InputStreamReader 2) File
+3) FileReader 4) FileInputStream
+답: 4번
+
+4. 다음은 파일을 읽기 위해 스트림을 생성하는 코드이다. 이 코드가 실행될 때 발생할
+수 있는 예외가 어떤 것이 있는지 설명하고, try-catch 블록으로 감싸는 코드를 작성하라.
+FileInputStream fin = new FileInputStream("song.mp3");
+답:
+try {
+    FileInputStream fin = new FileInputStream("song.mp3");
+} catch (FileNotFoundException e) {
+    e.printStackTrace();
+}
+
+5. 파일의 크기를 알려고 할 때 필요한 클래스는?
+1) File 2) FileSize
+3) System 4) FileInputStream
+답: 1번
+
+6. File 클래스의 직접적인 기능이 아닌 것은?
+1) 파일 읽고 쓰기 2) 파일 이름 변경
+3) 새 디렉터리 만들기 4) 파일 삭제
+답: 3번
+
+7. 다음 코드에 대해 물음에 답하라.
+File file = new File("c:\\windows\\system.ini");
+1) file.siFile()의 리턴 값은?
+2) file.getParent()의 리턴 값은?
+3) file.getPath()의 리턴 값은?
+4) file.getName()의 리턴 값은?
+5) 아래 빈칸을 채워 문제의 코드와 동일한 코드를 구성하라.
+File file = new File(_____________, "system.ini");
+답: 
+1) 존재하고 일반 파일이면 true 아니면 false
+2) c:\\windows
+3) c:\windows\system.ini
+4) system.ini
+5) "c:\\windows"
+
+8. 문자 집합에 대한 설명으로 틀린 것은?
+1) 문자들의 인코딩 정보로 구성된 문자 인코딩 세트를 뜻한다.
+2) 텍스트 파일 읽기 시 문자 집합을 알려주지 않으면 제대로 읽지 못하는 경우가 발생한다.
+3) 바이트 스트림 입출력 시 문자 집합을 고려하여 입출력해야 한다.
+4) 윈도우에서 작성된 텍스트 파일은 기본적으로 "MS949" 문자 집합으로 인코딩 된다.
+답: 4번
+
+9. C:\temp\test.txt 파일을 읽어 화면에 출력하는 코드이다. 빈칸을 완성하라.
+FileInputStream fin = null;
+try {
+	fin = new FileInputStram(____________);
+	int c;
+	while(true) {
+	   c = fin.read(); // 파일에서 한 바이트 읽기
+	   if (_________) break; // 파일 끝까지 읽었음
+	   System.out.print((char)c);
+	}
+	______________; // 파일 입력 스트림 닫기
+} catch (______________) {
+	System.out.println("파일을 찾을 수 없습니다.");
+} catch (IOException e) {
+	System.out.println("입출력 오류가 발생했습니다.");
+}
+답: "C:\\temp\\test.txt", c==-1, fin.close, FileNotFound Exception e
+
+10. 다음은 50바이트 크기의 버퍼를 사용하여 C:\temp\sample.txt를 읽어 화면에 출력
+하는 소스 코드의 일부이다. 빈칸을 채워라
+BufferedOutputStream bout = _____________;
+File f = new File(____________);
+FileReader fin = new FileReader(f);
+int c;
+while (______________) {
+	______________;
+}
+fin.close();
+bout.close();
+답: new BufferedOutputStream(new FileOutputStream("C:\\temp\\sample.txt"));, "C:\\temp\\sample.txt, (c = fin.read()) != -1), bout.write((char) c);

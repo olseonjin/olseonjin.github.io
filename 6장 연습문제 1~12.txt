@@ -1,0 +1,173 @@
+6장 연습문제 1~12
+
+1. import에 대한 다음 질문에 답하라.
+1) import 문은 언제 사용하며, import 문이 의미하는 바는 무엇인가?
+2) import java.util.Random; 과 import java.util.*;의 의미는 각각 무엇인가?
+3) import 문을 사용하지 않고도 자바 프로그램을 작성할 수 있는가?
+4) 어떤 패키지에 속한 클래스는 import 문 없이도 사용할 수 있는가?
+답:
+1.import 문은 다른 패키지에 있는 클래스를 현재 소스 파일에서 사용하기 위해 사용됩니다.
+2.import java.util.Random;은 java.util 패키지에 있는 Random 클래스만을 가져오는 것이며,         i import .java.util.*;은 java.util 패키지 내의 모든 클래스를 가져오는 것입니다.
+3.import 문을 사용하지 않고도 자바 프로그램을 작성할 수 있습니다.
+4.java.lang 패키지에 속한 클래스들은 import 문 없이 사용할 수 있습니다.
+
+2. 패키지에 대한 설명 중 잘못된 것은?
+1) package 키워드를 이용하여 패키지를 선언한다.
+2) 서로 관련된 클래스와 인터페이스들을 하나의 디렉터리에 묶어 놓은 것이다.
+3) 패키지는 컴파일된 클래스 파일들을 저장하는 위치를 지정한다.
+4) 자바 JDK는 클래스들을 모두 하나의 패키지에 담아 제공한다.
+답: 4번
+
+[3-4] 다므은 코드와 실행 결과이다.
+import java.util.StringTokenizer;
+public class Example {
+	public static void main(String[] args) {
+	   StringTokenizer st = new StringTokenizer("a=3,b=5,c=6", ",");
+	   While (st.hasMoreTokens())
+	      System.out.println(st.nextToken());
+	}
+}
+3. import 문을 사용하지 않도록 Example 클래스를 다시 작성하라.
+답:
+public class Example {
+    public static void main(String[] args) {
+        java.util.StringTokenizer st = new java.util.StringTokenizer("a=3,b=5,c=6", ",");
+        while (st.hasMoreTokens())
+            System.out.println(st.nextToken());
+    }
+}
+
+4. 다음과 같이 출력되도록 코드를 수정하라.
+a
+3
+b
+5
+c
+6
+합은 14
+답:
+public class Example {
+    public static void main(String[] args) {
+        java.util.StringTokenizer st = new java.util.StringTokenizer("a=3,b=5,c=6", ",=");
+        int sum = 0;
+        while (st.hasMoreTokens()) {
+            String token = st.nextToken();
+            System.out.println(token);
+            try {
+                int value = Integer.parseInt(st.nextToken());
+                sum += value;
+            } catch (NumberFormatException e) {
+                System.out.println(token); // 알파벳 부분 출력
+            }
+        }
+        System.out.println("합은 " + sum);
+    }
+}
+
+
+5. 다음 물음에 답하라.
+(1) 다음 클래스를 device 패키지에 속하게 하고자 한다. 빈칸에 적합한 코드를 작성하라.
+_______________;
+public class TV {
+	private int size;
+	public TV(int size) { this.size = size; }
+}
+답: package device;
+
+(2) 앞에서 작성한 TV 클래스를 활용하는 Home 클래스를 작성한다. Home 클래스를
+       app 패키지에 저장하고자 할 때 빈칸에 적합한 코드를 작성하라.
+______________;
+______________;
+public class Home {
+	public Home() { TV myTV = new TV(65); }
+}
+답: package app;, import device.TV;
+
+(3) TV 클래스와 Home 클래스를 컴파일한 TV.class와 Home.class의 경로명은?
+답: device와 app 폴더 내에 TV.class 와 Home.class 로 컴파일됨.
+
+6. Wrapper 클래스에 대한 질문이다. 다음 물음에 답하여라.
+1) 정수 20을 문자열 변수 s1에 "20"으로 저장하는 코드를 작성하라.
+2) 문자열 "35.9"를 double 타입 변수 d에 실수 값 35.9로 저장하는 코드를 작성하라.
+3) "true" 문자열을 boolean 타입 변수 b에 불린 값 true로 저장하는 코드를 작성하라.
+4) 정수 30을 이진수의 문자열로 변환하여 s2에 저장하는 한 줄의 코드를 작성하라.
+5) 문자 'c'를 문자열 "c"로 변환하여 변수 c에 저장하는 한 줄의 코드를 작성하라.
+답:
+1.String s1 = Integer.toString(20);
+2.double d = Double.parseDouble("35.9");
+3.boolean b = Boolean.parseBoolean("true");
+4.String s2 = Integer.toBinaryString(30);
+5.char c = 'c';
+  String strC = Character.toString(c);
+
+
+7.다음 코드의 실행 결과와 실행 결과의 이유를 말하라.
+String a = "가나다라";
+System.out.println(a == "가나다라");
+String b = new String(a);
+System.out.println( a== b);
+답:true(동일한 리터럴 문자열을 참조), false(새로운 주소를 참조)
+
+8. 다음 코드가 실행된 후 a, b, c 문자열은 무엇인가?
+String a = new String("        Oh,  Happy    ");
+String b = a.trim();
+String c = b.concat(" Day.");
+답: a이는 원래 문자열, b는 앞뒤 공백을 제거한 새로운 문자열, c는 b의 끝에 Day 문자열을 추가한 새로운 문자열
+
+9. 다음 코드에 대해 물음에 답하여라.
+String a = "Hello";
+String b = "Hello";
+String c = "Java";
+String d = new String("Hello");
+String e = new String("Java");
+String f = new String("Java");
+1) a와 == 연산을 수행하였을 때 true가 되는 문자열을 b~f 중 모두 골라라.
+2) f와 equals() 연산을 수행하였을 때 true가 되는 문자열을 a~e 중 모두 골라라.
+답: b, e
+
+10. 다음 중 자동 박싱과 자동 언박싱이 있는 부분을 파악하라.
+1) Double PI = 3.14;
+2) double pi = PI;
+3) System.out.println(3 + Integer.valueOf(5));
+4) if('c' == Character.valueOf('c'))
+답: 자동 박싱, 자동 언박싱, 자동 박싱, 자동 박싱
+
+11. 100에서 255까지(255 포함)의 난수를 10개 발생시키는 코드이다.
+for(int i=0; i<10; i++) {
+	System.out.print(________________);
+	System.out.print(" ");
+}
+1)Math 클래스를 활용하여 빈칸에 적절한 코드를 작성하라.
+2)Random 클래스로 난수를 발생시키도록 코드 전체를 재작성하라.
+답:
+1.
+for (int i = 0; i < 10; i++) {
+    System.out.print((int) (Math.random() * 156 + 100));
+    System.out.print(" ");
+}
+
+2.
+Random random = new Random();
+for (int i = 0; i < 10; i++) {
+    System.out.print(random.nextInt(156) + 100);
+    System.out.print(" ");
+}
+
+
+12. 다음은 2020년 12월 25일의 약속을 저장하기 위해 Calendar 클래스를 활용하는 코드이다.
+    주석문에 맞도록 코드를 작성하라.
+Calendar date = _____________; // Calendar 객체 생성
+date.________________; // 현재 Calendar 객체에 저장된 정보를 모두 지운다.
+date.________________; // Calendar 객체에 2020년의 년도 저장
+date.________________; // Calendar 객체에 12월의 달 저장
+date.________________; // Calendar 객체에 25일의 날짜 저장
+System.out.println("약속 날짜는 " + date. _________  + " 년 " +
+	(date. ________ + 1) + " 월  " + date. __________ + " 일 ");
+답:
+Calendar date = Calendar.getInstance(); // Calendar 객체 생성
+date.clear(); // 현재 Calendar 객체에 저장된 정보를 모두 지운다.
+date.set(Calendar.YEAR, 2020); // Calendar 객체에 2020년의 년도 저장
+date.set(Calendar.MONTH, Calendar.DECEMBER); // Calendar 객체에 12월의 달 저장
+date.set(Calendar.DAY_OF_MONTH, 25); // Calendar 객체에 25일의 날짜 저장
+System.out.println("약속 날짜는 " + date.get(Calendar.YEAR) + " 년 " +
+	(date.get(Calendar.MONTH) + 1) + " 월  " + date.get(Calendar.DAY_OF_MONTH) + " 일 ");

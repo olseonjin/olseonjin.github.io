@@ -1,0 +1,163 @@
+7장 연습문제 1~12
+
+1. 컬렉션에 관한 설명으로 틀린 것은?
+1) 가변 크기라서 배열보다 사용하기 편하다.
+2) 삽입 삭제 시 원소의 위치를 컬레션이 자동 조절하므로 편하다.
+3) 객체들만 삽입되므로 int와 같은 기본 타입의 값을 저장하는 방법이 없어 아쉽다.
+4) 컬렉션은 모두 제네릭(generics)으로 만들어져 있다.
+답: 4번
+
+2. 다음 빈칸에 적잘한 단어를 기입하라.
+클래스, 인터페이스, 메소드를 특정 타입에 종속되지 않게 ____시켜 작성하는
+기술을 ____이라 한다. Vector<E>에서 E는 제네릭 타입 혹은 ____라고 부
+른다. E에 Interger 등과 같이 객체 타입을 지정하여 특정 타입의 데이터만 다루
+도록 만드는 작업을 ____라고 한다. 제네릭 기능은 C++에서 먼저 만들어졌으며
+C++에서는 ____ 이라고 부른다.
+답: 독립, 제네릭, 타입 매개변수, 제한된 타입 매개변수, 템플릿
+
+3. 다음 코드에 대한 설명으로 틀린 것은?
+Vector<Integer> v = new Vector<Integer> (30);
+1) Integer 타입 객체만 저장할 수 있는 구체화된 벡터를 생성하는 코드이다.
+2) 벡터 v는 원소를 30개만 저장할 수 있는 벡터이다.
+3) v.add(10)를 호출하여 정수 10을 벡터에 삽입할 수 있다.
+4) 벡터 v에는 실수 값을 삽입할 수 없다.
+답: 4번
+
+4. 다음 물음에 적합한 코드를 간단히 작성하라.
+1) 문자열만 저장할 수 있는 벡터 sv 생성
+2) '키'가 문자열이고 '값'이 실수인 해시맵 h 생성
+3) Person 타입의 객체를 10개 저장할 공간을 갖춘 ArrayList 컬렌션 pa 생성
+4) 나라 이름과 인구를 저장하고 관리하는 해시맵 pop 생성
+답:
+1) 문자열만 저장할 수 있는 벡터 sv 생성
+Vector<String> sv = new Vector<>();
+
+2) '키'가 문자열이고 '값'이 실수인 해시맵 h 생성
+HashMap<String, Double> h = new HashMap<>();
+
+3) Person 타입의 객체를 10개 저장할 공간을 갖춘 ArrayList 컬렉션 pa 생성
+ArrayList<Person> pa = new ArrayList<>(10);
+
+4) 나라 이름과 인구를 저장하고 관리하는 해시맵 pop 생성
+HashMap<String, Integer> pop = new HashMap<>();
+
+
+5. 다음 코드에서 맞는 것은?
+1) Stack<STring> ss;
+2)ArrayList<E> ar = new ArrayList<E>();
+3)HashMap<string> h = new HashMap<String>();
+4)Set<Integer> s = new Set<Integer>(100);
+답:2번
+
+6. 다음 코드에서 자동 박싱과 자동 언박싱이 일어나는 곳을 지적하라.
+Vector<Double> V  = new Vector<Double>();
+v.add(3.14);
+double d = v.get(0);
+답: 자동 박싱: v.add(3.14);, 자동 언박싱: double d = v.get(0);
+
+7. 다음 프로그램은 초기에 벡터의 크기를 3으로 설정하였다. for 문을 실행하고 벗어났
+을 때 벡터의 용량이 어떻게 변했는지 확인하라. 벡터는 용량이 모자랄 때, 한 번에 얼
+마만큼씩 용량을 늘리는가?
+Vector<Integer> v = new Vector<Integer>(3); // 현재 벡터 용량은 3
+for (int i=0; i<10; i++) v.add(i);        // 정수를 10개 벡터에 삽입
+System.out.println(v.capacity());               // 벡터에 변한 용량은 얼마?
+답: 현재 크기를 두 배로 늘립니다.
+
+8. 주석문을 참고하여 빈칸에 적절한 코드로 채워라.
+ArrayList<String> a = _____________; // 초기 용량이 19인 ArrayList 생성
+___________________________________ // a의 맨 끝에 "Java" 삽입
+___________________________________  // a의 맨 앞에 "C++" 삽입
+___________________________________  // a에 현재 삽입된 개수 출력
+___________________________________  // a의 마지막에 있는 문자열 삭제
+답:
+ArrayList<String> a = new ArrayList<>(19); // 초기 용량이 19인 ArrayList 생성
+a.add("Java"); // a의 맨 끝에 "Java" 삽입
+a.add(0, "C++"); // a의 맨 앞에 "C++" 삽입
+System.out.println(a.size()); // a에 현재 삽입된 개수 출력
+a.remove(a.size() - 1); // a의 마지막에 있는 문자열 삭제
+
+
+9. 다음에서 밑줄친 부분과 동일하게 작동하도록 Iterator를 이용하여 다시 작성하라.
+Vector<Interger> v = new Vector<Integer>();
+for(int i=0; i<10; i++) v.add(i);
+for(int i=0; i<v.size(); i++)
+	System.out.print(v.get(i) + " ");
+답:
+Vector<Integer> v = new Vector<>();
+for (int i = 0; i < 10; i++) v.add(i);
+Iterator<Integer> iterator = v.iterator();
+while (iterator.hasNext()) {
+    System.out.print(iterator.next() + " ");
+}
+
+
+10. 다음은 해시맵 h를 만들고, func(h) 메소드를 호출하여 h에 들어 있는 원소의 개수를
+리턴받아 출력하는 코드이다. func() 메소드를 작성하라.
+HashMap<String, Integer> h = new HashMap<String, Integer>();
+h.put("a", 10);
+h.put("b", 20);
+System.out.println(func(h)); // 해시맵 h에 들어 있는 원소 개수 출력
+답:
+public static int func(HashMap<String, Integer> map) {
+    return map.size();
+}
+
+
+11. 다음 제네릭 클래스에 대해 아래 문항에 답하라.
+class JGeneric<W> {
+	private W x, y;
+	public JGeneric(W x, W y) { this.x = x; this.y = y; }
+	________________ // (3) 여러 줄로 작성 가능
+	________________ // (4) 여러 줄로 작성 가능
+	________________ // (5) 여러 줄로 작성 가능
+}
+1) JGeneric의 타입 매개변수는 몇 개이며, 무엇인가?
+2) String으로 구체화한 JGeneric 객체를 생성하는 코드를 작성하라.
+3) 첫 번째 값 x를 리턴하는 메소드 first()를 작성하라.
+4) 두 번째 값 y를 리턴하는 메소드 second()를 작성하라.
+5) equal() 메소드를 작성하라. equal()는 필드 x와 y를 비교하여 같으면 true, 아니면 flase를 리턴한다.
+6) <W>를 String으로 구체화한 JGeneric 객체를 활요하는 예를 들어라.
+답:
+1) 1개, W
+2) JGeneric<String> example = new JGeneric<>("hello", "world");
+3) 
+public W first() {
+    return x;
+}
+4)
+public W second() {
+    return y;
+}
+5)
+public boolean equal() {
+    return x.equals(y);
+}
+6) JGeneric<String> example = new JGeneric<>("apple", "banana");
+
+
+
+12. 다음 질문에 답하라.
+class JClass {
+	static String take(String s[], int index) {
+	   if (index > s.legth) {
+		System.out.println("인덱스가 범위를 벗어났습니다.");
+		return null
+ 	   }
+	   return s[index];
+	}
+}
+1) JClass의 take() 메소드는 무엇을 처리하는 코드인가?
+2) JClass의 take() 메소드가 임의의 타입에 대해 동작하도록 제네릭 메소드로 수
+정하여 JGenClass를 작성하라.
+3) JGenClass를 활용하는 코드 사례를 보여라.
+답:
+1) 인덱스가 범위를 벗어날 경우 오류를 출력
+2) static <T> T take(T[] arr, int index) {
+        if (index >= arr.length || index < 0) {
+3)
+String[] strArray = {"Apple", "Orange", "Banana", "Grapes"};
+
+String result = JGenClass.take(strArray, 2);
+System.out.println(result); 
+String result2 = JGenClass.take(strArray, 5);
+
